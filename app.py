@@ -1,6 +1,8 @@
 import streamlit as st
 import pickle
 import requests
+from joblib import load
+
 
 # change title name
 st.set_page_config(
@@ -11,7 +13,8 @@ st.set_page_config(
 @st.cache_resource               # Run this function only once, save (“cache”) the result, and reuse it every time the app reruns
 def load_data():
     movies = pickle.load(open("movie_list.pkl", "rb"))
-    similarity = pickle.load(open("similarities.pkl", "rb"))
+    # similarity = pickle.load(open("similarities.pkl", "rb"))
+    similarity = load("model.joblib")
     return movies, similarity
 
 movies, similarity = load_data()
